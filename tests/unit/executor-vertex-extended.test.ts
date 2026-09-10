@@ -420,7 +420,12 @@ test("VertexExecutor.execute synthesizes a genuine Anthropic-format SSE stream w
         content: [{ type: "text", text: "hello" }],
         stop_reason: "end_turn",
         stop_sequence: null,
-        usage: { input_tokens: 5, output_tokens: 2 },
+        usage: {
+          input_tokens: 5,
+          output_tokens: 2,
+          cache_creation_input_tokens: 1_024,
+          cache_read_input_tokens: 4_096,
+        },
       }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
@@ -458,6 +463,12 @@ test("VertexExecutor.execute synthesizes a genuine Anthropic-format SSE stream w
       "message_delta",
       "message_stop",
     ]);
+    assert.deepEqual(dataLines[0].message.usage, {
+      input_tokens: 5,
+      output_tokens: 0,
+      cache_creation_input_tokens: 1_024,
+      cache_read_input_tokens: 4_096,
+    });
   } finally {
     globalThis.fetch = originalFetch;
   }

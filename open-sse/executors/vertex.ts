@@ -261,6 +261,16 @@ function synthesizeClaudeSse(response: Record<string, unknown>): string {
   const stopReason = typeof response.stop_reason === "string" ? response.stop_reason : "end_turn";
   const stopSequence = (response.stop_sequence as string | null | undefined) ?? null;
   const content = Array.isArray(response.content) ? response.content : [];
+  const inputUsage: Record<string, unknown> = {
+    input_tokens: usage.input_tokens || 0,
+    output_tokens: 0,
+  };
+  if (typeof usage.cache_creation_input_tokens === "number") {
+    inputUsage.cache_creation_input_tokens = usage.cache_creation_input_tokens;
+  }
+  if (typeof usage.cache_read_input_tokens === "number") {
+    inputUsage.cache_read_input_tokens = usage.cache_read_input_tokens;
+  }
 
   const events: Array<{ event: string; data: Record<string, unknown> }> = [];
 
@@ -276,7 +286,7 @@ function synthesizeClaudeSse(response: Record<string, unknown>): string {
         model,
         stop_reason: null,
         stop_sequence: null,
-        usage: { input_tokens: usage.input_tokens || 0, output_tokens: 0 },
+        usage: inputUsage,
       },
     },
   });
