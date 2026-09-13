@@ -8,6 +8,7 @@ import {
 } from "./base.ts";
 import { PROVIDERS, OAUTH_ENDPOINTS } from "../config/constants.ts";
 import { getModelTargetFormat } from "../config/providerModels.ts";
+import { dropTrailingAssistantPrefill } from "../utils/assistantPrefill.ts";
 import {
   getGitHubCopilotChatHeaders,
   getGitHubCopilotRefreshHeaders,
@@ -256,7 +257,7 @@ export class GithubExecutor extends BaseExecutor {
     // scoped to the GitHub executor only (the shared translator/contextManager and
     // other providers that DO honor prefill are untouched).
     // Port of 9router#2143 (author: Manuel <baslr@users.noreply.github.com>).
-    modifiedBody.messages = this.dropTrailingAssistantPrefill(modifiedBody.messages);
+    modifiedBody.messages = dropTrailingAssistantPrefill(modifiedBody.messages);
   }
 
   private sanitizeChatCompletionsMessage(msg: any): any {
@@ -286,19 +287,6 @@ export class GithubExecutor extends BaseExecutor {
     // If every part stripped to empty (e.g. tool_use with no text), collapse to null so
     // GitHub does not reject an empty-array body. tool_calls ride alongside content.
     return { ...msg, content: cleanContent.length > 0 ? cleanContent : null };
-  }
-
-  // Remove trailing assistant message(s). GitHub Copilot's /chat/completions endpoint
-  // can't honor an assistant prefill and 400s unless the conversation ends with a
-  // non-assistant (user/tool) message. Never empties the array — an assistant-only
-  // conversation keeps its last message. No-op (same array reference) when the
-  // conversation already ends with a non-assistant message.
-  // Port of 9router#2143 (author: Manuel <baslr@users.noreply.github.com>).
-  dropTrailingAssistantPrefill(messages: any): any {
-    if (!Array.isArray(messages) || messages.length === 0) return messages;
-    let end = messages.length;
-    while (end > 1 && messages[end - 1]?.role === "assistant") end--;
-    return end === messages.length ? messages : messages.slice(0, end);
   }
 
   async execute(input: ExecuteInput) {

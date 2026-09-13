@@ -2,6 +2,7 @@ import { SignJWT, importPKCS8 } from "jose";
 import { BaseExecutor, ExecuteInput } from "./base.ts";
 import { PROVIDERS } from "../config/constants.ts";
 import { getVertexModelTransport, normalizeVertexModelId } from "../config/vertexModels.ts";
+import { dropTrailingAssistantPrefill } from "../utils/assistantPrefill.ts";
 
 interface ServiceAccount {
   type: string;
@@ -403,6 +404,12 @@ export class VertexExecutor extends BaseExecutor {
       // The rawPredict endpoint requires "anthropic_version" in the body (Vertex's substitute
       // for the "anthropic-version" header used by Anthropic's direct API).
       body.anthropic_version ??= "vertex-2023-10-16";
+
+      // Vertex AI Claude models don't support assistant prefill text and will return 400.
+      if (Array.isArray(body.messages)) {
+        body.messages = dropTrailingAssistantPrefill(body.messages);
+      }
+
       // Unlike Anthropic's direct API (which reads the model from the body), Vertex's
       // rawPredict endpoint already encodes project/region/model in the URL and 400s with
       // "model: Extra inputs are not permitted" if the translated request body still carries
