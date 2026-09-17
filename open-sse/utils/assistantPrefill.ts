@@ -22,12 +22,12 @@ export function hasTextContent(msg: Record<string, unknown> | null | undefined):
   return false;
 }
 
-export function dropTrailingAssistantPrefill<T extends any[]>(messages: T | unknown): T | unknown {
+export function dropTrailingAssistantPrefill<T extends unknown[]>(messages: T | unknown): T | unknown {
   if (!Array.isArray(messages) || messages.length === 0) return messages;
   let end = messages.length;
 
   while (end > 1) {
-    const msg = messages[end - 1];
+    const msg = messages[end - 1] as Record<string, unknown> | null | undefined;
     if (msg?.role !== "assistant") break;
 
     // If it only has tool_calls (or no text content), we do NOT trim it
