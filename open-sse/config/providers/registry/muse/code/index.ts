@@ -55,7 +55,7 @@ export const MUSE_CODE_MODELS: RegistryModel[] = [
 export const MUSE_CODE_SHARED = {
   format: "openai",
   executor: "default",
-  baseUrl: "https://api.meta.ai/v1",
+  baseUrl: "https://api.meta.ai/v1/responses",
   authHeader: "bearer",
   defaultContextLength: 1048576,
   models: MUSE_CODE_MODELS,

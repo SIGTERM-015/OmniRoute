@@ -4116,8 +4116,8 @@
       }
     },
     "url": {
-      "nonStream": "https://api.meta.ai/v1",
-      "stream": "https://api.meta.ai/v1"
+      "nonStream": "https://api.meta.ai/v1/responses",
+      "stream": "https://api.meta.ai/v1/responses"
     }
   },
   "muse-spark-web": {

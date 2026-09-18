@@ -40,7 +40,7 @@ export const PROVIDERS = {
   agy,
   qoder,
   "kimi-coding": kimiCoding,
-  "muse-code": museCode,
+  "muse-code-oauth": museCode,
   github,
   "ghe-copilot": gheCopilot,
   "gitlab-duo": gitlabDuo,

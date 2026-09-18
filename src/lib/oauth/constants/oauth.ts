@@ -507,7 +507,7 @@ export const PROVIDERS = {
   ANTIGRAVITY: "antigravity",
   AGY: "agy",
   KIMI_CODING: "kimi-coding",
-  MUSE_CODE: "muse-code",
+  MUSE_CODE: "muse-code-oauth",
   OPENAI: "openai",
   GITHUB: "github",
   GHE_COPILOT: "ghe-copilot",

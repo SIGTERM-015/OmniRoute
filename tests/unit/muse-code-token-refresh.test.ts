@@ -19,9 +19,9 @@ test("muse-code provider module is exported through the tokenRefresh surface", (
   assert.equal(typeof refreshMuseCodeToken, "function");
 });
 
-test("supportsTokenRefresh advertises both muse-code ids", () => {
+test("supportsTokenRefresh advertises muse-code-oauth but not muse-code", () => {
   assert.equal(supportsTokenRefresh("muse-code-oauth"), true);
-  assert.equal(supportsTokenRefresh("muse-code"), true);
+  assert.equal(supportsTokenRefresh("muse-code"), false);
 });
 
 test("refreshMuseCodeToken re-mints the api key with the OIDC bearer token", async () => {

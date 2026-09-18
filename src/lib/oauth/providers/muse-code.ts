@@ -137,7 +137,7 @@ export const museCode = {
     accessToken: tokens.api_key,
     // The OIDC access token is the refresh handle: refreshing re-mints the key.
     refreshToken: tokens.access_token,
-    expiresIn: undefined,
+    expiresIn: tokens.expires_in as number | undefined,
     email: tokens.user_email,
     providerSpecificData: {
       user_email: tokens.user_email,

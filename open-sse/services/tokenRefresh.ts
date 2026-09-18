@@ -444,10 +444,8 @@ async function _getAccessTokenInternal(provider, credentials, log, proxyConfig: 
       return await refreshCodebuddyCnToken(credentials.refreshToken, log, proxyConfig);
 
     // OAuth connections are stored under the registry backend id
-    // "muse-code-oauth" (see open-sse/config/providers/registry/muse/code);
-    // "muse-code" is the API-key preset that shares the same mint endpoint.
+    // "muse-code-oauth" (see open-sse/config/providers/registry/muse/code).
     case "muse-code-oauth":
-    case "muse-code":
       return await refreshMuseCodeToken(credentials.refreshToken, log, proxyConfig);
 
     default:
@@ -482,7 +480,6 @@ export function supportsTokenRefresh(provider) {
     "codebuddy-cn",
     "cursor",
     "muse-code-oauth",
-    "muse-code",
   ]);
   if (explicitlySupported.has(provider)) return true;
   const config = PROVIDERS[provider];
