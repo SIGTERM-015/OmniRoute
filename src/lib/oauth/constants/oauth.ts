@@ -186,7 +186,7 @@ export const MUSE_CODE_CONFIG = {
   tokenUrl: "https://auth.meta.com/oidc/device/token/",
   mintUrl: "https://api.meta.ai/muse-code/key",
   apiVersion: "1.0.0",
-  baseUrl: "https://api.meta.ai/v1",
+  baseUrl: "https://api.meta.ai/v1/responses",
 };
 
 // KiloCode OAuth Configuration (Custom Device Auth Flow)

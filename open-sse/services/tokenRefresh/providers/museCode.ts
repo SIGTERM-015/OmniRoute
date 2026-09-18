@@ -1,4 +1,3 @@
-// @ts-nocheck
 // Extracted-style provider module — see ../shared.ts for provenance notes.
 import { runWithProxyContext } from "../../../utils/proxyFetch.ts";
 import type { RefreshLogger } from "../shared.ts";
