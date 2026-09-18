@@ -356,5 +356,6 @@ export const APIKEY_PROVIDERS_FRONTIER = {
       "Muse Code is OpenAI-compatible. OmniRoute routes chat traffic through the Responses API and exposes the proprietary model catalog at /v1/muse-code/models.",
     passthroughModels: true,
     hasFree: false,
+    oauthProviderId: "muse-code-oauth",
   },
 };
