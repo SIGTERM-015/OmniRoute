@@ -49,7 +49,7 @@ export const OAUTH_PROVIDERS = {
     // Keep this catalog entry addressable for existing routes and stored connections.
     hiddenFromDashboard: true,
     authHint:
-      "Sign in with Meta to use api.meta.ai Muse Spark models. Separate from the META_API_KEY API-key preset.",
+      "Sign in with Meta to use api.meta.ai Muse Spark models. ⚠️ Routing a personal Muse Code subscription through a third-party gateway may violate Meta's terms and risk account suspension — use at your own risk. Separate from the META_API_KEY API-key preset.",
   },
   openference: {
     id: "openference",
