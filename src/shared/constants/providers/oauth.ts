@@ -34,6 +34,23 @@ export const OAUTH_PROVIDERS = {
     authHint:
       "Sign in with xAI to use api.x.ai models such as Grok 4.5. This is separate from Grok Build JWT sessions, which use cli-chat-proxy.grok.com and grok-build model aliases.",
   },
+  "muse-code-oauth": {
+    id: "muse-code-oauth",
+    serviceKinds: ["llm"],
+    alias: "mco",
+    name: "Muse Code OAuth (Meta)",
+    icon: "auto_awesome",
+    color: "#0866FF",
+    textIcon: "MO",
+    website: "https://api.meta.ai",
+    subscriptionRisk: true,
+    riskNoticeVariant: "oauth",
+    // Render Muse Code OAuth through the unified Muse Code dashboard card.
+    // Keep this catalog entry addressable for existing routes and stored connections.
+    hiddenFromDashboard: true,
+    authHint:
+      "Sign in with Meta to use api.meta.ai Muse Spark models. ⚠️ Routing a personal Muse Code subscription through a third-party gateway may violate Meta's terms and risk account suspension — use at your own risk. Separate from the META_API_KEY API-key preset.",
+  },
   openference: {
     id: "openference",
     serviceKinds: ["llm"],
@@ -44,9 +61,10 @@ export const OAUTH_PROVIDERS = {
     textIcon: "OF",
     website: "https://openference.com",
     hasFree: true,
-    freeNote: "Free plan: 3-day trial with open-source models — no credit card required",
+    freeNote:
+      "Free tier: includes Qwen3.8 27b and Llama 3.2 3B — see openference.com/pricing for current terms",
     authHint:
-      "Sign in with your Openference account to route requests through api.openference.com. An active plan is required for inference — OAuth may authenticate but return 402 without one.",
+      "Sign in with your Openference account to route requests through api.openference.com. Includes free-tier access to Qwen3.8 27b and Llama 3.2 3B — see openference.com/pricing for current plan terms.",
   },
   "grok-cli": {
     id: "grok-cli",
@@ -142,7 +160,14 @@ export const OAUTH_PROVIDERS = {
     subscriptionRisk: true,
     riskNoticeVariant: "oauth",
   },
-  github: { id: "github", serviceKinds: ["llm"], alias: "gh", name: "GitHub Copilot", icon: "code", color: "#333333" },
+  github: {
+    id: "github",
+    serviceKinds: ["llm"],
+    alias: "gh",
+    name: "GitHub Copilot",
+    icon: "code",
+    color: "#333333",
+  },
   "gitlab-duo": {
     id: "gitlab-duo",
     serviceKinds: ["llm"],
